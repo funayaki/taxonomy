@@ -1,22 +1,12 @@
 <?php
 use Migrations\AbstractMigration;
 
-class CroogoTaxonomyInitialMigration extends AbstractMigration
+class TaxonomyInitialMigration extends AbstractMigration
 {
-
-    public $autoId = false;
-
     public function up()
     {
-        $table = $this->table('taxonomies');
-        $table
-            ->addColumn('id', 'integer', [
-                'autoIncrement' => true,
-                'default' => null,
-                'limit' => 20,
-                'null' => false,
-            ])
-            ->addPrimaryKey(['id'])
+
+        $this->table('taxonomies')
             ->addColumn('parent_id', 'integer', [
                 'default' => null,
                 'limit' => 20,
@@ -44,15 +34,7 @@ class CroogoTaxonomyInitialMigration extends AbstractMigration
             ])
             ->create();
 
-        $table = $this->table('terms');
-        $table
-            ->addColumn('id', 'integer', [
-                'autoIncrement' => true,
-                'default' => null,
-                'limit' => 10,
-                'null' => false,
-            ])
-            ->addPrimaryKey(['id'])
+        $this->table('terms')
             ->addColumn('title', 'string', [
                 'default' => null,
                 'limit' => 255,
@@ -96,15 +78,7 @@ class CroogoTaxonomyInitialMigration extends AbstractMigration
             )
             ->create();
 
-        $table = $this->table('types');
-        $table
-            ->addColumn('id', 'integer', [
-                'autoIncrement' => true,
-                'default' => null,
-                'limit' => 10,
-                'null' => false,
-            ])
-            ->addPrimaryKey(['id'])
+        $this->table('types')
             ->addColumn('title', 'string', [
                 'default' => null,
                 'limit' => 255,
@@ -121,17 +95,17 @@ class CroogoTaxonomyInitialMigration extends AbstractMigration
                 'null' => true,
             ])
             ->addColumn('format_show_author', 'boolean', [
-                'default' => 1,
+                'default' => true,
                 'limit' => null,
                 'null' => false,
             ])
             ->addColumn('format_show_date', 'boolean', [
-                'default' => 1,
+                'default' => true,
                 'limit' => null,
                 'null' => false,
             ])
             ->addColumn('format_use_wysiwyg', 'boolean', [
-                'default' => 1,
+                'default' => true,
                 'limit' => null,
                 'null' => false,
             ])
@@ -141,17 +115,17 @@ class CroogoTaxonomyInitialMigration extends AbstractMigration
                 'null' => false,
             ])
             ->addColumn('comment_approve', 'boolean', [
-                'default' => 1,
+                'default' => true,
                 'limit' => null,
                 'null' => false,
             ])
             ->addColumn('comment_spam_protection', 'boolean', [
-                'default' => 0,
+                'default' => false,
                 'limit' => null,
                 'null' => false,
             ])
             ->addColumn('comment_captcha', 'boolean', [
-                'default' => 0,
+                'default' => false,
                 'limit' => null,
                 'null' => false,
             ])
@@ -193,15 +167,7 @@ class CroogoTaxonomyInitialMigration extends AbstractMigration
             )
             ->create();
 
-        $table = $this->table('vocabularies');
-        $table
-            ->addColumn('id', 'integer', [
-                'autoIncrement' => true,
-                'default' => null,
-                'limit' => 10,
-                'null' => false,
-            ])
-            ->addPrimaryKey(['id'])
+        $this->table('vocabularies')
             ->addColumn('title', 'string', [
                 'default' => null,
                 'limit' => 255,
@@ -218,17 +184,17 @@ class CroogoTaxonomyInitialMigration extends AbstractMigration
                 'null' => true,
             ])
             ->addColumn('required', 'boolean', [
-                'default' => 0,
+                'default' => false,
                 'limit' => null,
                 'null' => false,
             ])
             ->addColumn('multiple', 'boolean', [
-                'default' => 0,
+                'default' => false,
                 'limit' => null,
                 'null' => false,
             ])
             ->addColumn('tags', 'boolean', [
-                'default' => 0,
+                'default' => false,
                 'limit' => null,
                 'null' => false,
             ])
@@ -269,7 +235,6 @@ class CroogoTaxonomyInitialMigration extends AbstractMigration
                 ['unique' => true]
             )
             ->create();
-
     }
 
     public function down()
