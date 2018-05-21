@@ -1,6 +1,6 @@
 <?php
 
-namespace Croogo\Taxonomy\Model\Table;
+namespace Taxonomy\Model\Table;
 
 use ArrayObject;
 use Cake\Event\Event;

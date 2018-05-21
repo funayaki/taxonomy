@@ -13,17 +13,17 @@ Please see the [documentation](http://docs.croogo.org/3.0)
 You need to enable the plugin your config/bootstrap.php file:
 
 ```
-Plugin::load('Croogo/Taxonomy', ['bootstrap' => false, 'routes' => true, 'autoload' => true]);
+Plugin::load('Taxonomy', ['bootstrap' => false, 'routes' => true, 'autoload' => true]);
 ```
 
 ### Running migrations
 
 ```
-bin/cake migrations migrate --plugin Croogo/Taxonomy
+bin/cake migrations migrate --plugin Taxonomy
 ```
 
 ### Inserting data (Optional)
 
 ```
-bin/cake migrations seed --plugin Croogo/Taxonomy
+bin/cake migrations seed --plugin Taxonomy
 ```

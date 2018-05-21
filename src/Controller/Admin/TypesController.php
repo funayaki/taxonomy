@@ -1,6 +1,6 @@
 <?php
 
-namespace Croogo\Taxonomy\Controller\Admin;
+namespace Taxonomy\Controller\Admin;
 
 use Cake\Event\Event;
 
@@ -14,7 +14,7 @@ use Cake\Event\Event;
  * @license  http://www.opensource.org/licenses/mit-license.php The MIT License
  * @link     http://www.croogo.org
  *
- * @property \Croogo\Taxonomy\Model\Table\TypesTable Types
+ * @property \Taxonomy\Model\Table\TypesTable Types
  */
 class TypesController extends AppController
 {
@@ -24,18 +24,19 @@ class TypesController extends AppController
     {
         parent::initialize();
 
-        $this->Crud->config('actions.index', [
-            'displayFields' => $this->Types->displayFields(),
-        ]);
+//        $this->Crud->config('actions.index', [
+//            'displayFields' => $this->Types->displayFields(),
+//        ]);
     }
 
     public function implementedEvents()
     {
-        return parent::implementedEvents() + [
-            'Crud.beforePaginate' => 'beforePaginate',
-            'Crud.beforeRedirect' => 'beforeCrudRedirect',
-            'Crud.beforeFind' => 'beforeCrudFind',
-        ];
+        parent::implementedEvents();
+//        return parent::implementedEvents() + [
+//            'Crud.beforePaginate' => 'beforePaginate',
+//            'Crud.beforeRedirect' => 'beforeCrudRedirect',
+//            'Crud.beforeFind' => 'beforeCrudFind',
+//        ];
     }
 
     public function beforePaginate(Event $event)

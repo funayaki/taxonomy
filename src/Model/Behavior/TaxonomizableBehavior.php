@@ -1,6 +1,6 @@
 <?php
 
-namespace Croogo\Taxonomy\Model\Behavior;
+namespace Taxonomy\Model\Behavior;
 
 use Cake\Event\Event;
 use Cake\I18n\I18n;

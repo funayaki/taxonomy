@@ -14,7 +14,7 @@
     "type": "cakephp-plugin",
     "autoload": {
         "psr-4": {
-            "Croogo\\Taxonomy\\": "src"
+            "Taxonomy\\": "src"
         }
     },
     "minimum-stability": "dev"
