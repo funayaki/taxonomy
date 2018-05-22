@@ -2,10 +2,16 @@
     "name": "funayaki/taxonomy",
     "description": "Croogo Taxonomy Plugin",
     "require": {
-        "croogo/core": "^3.0.1",
+        "funayaki/core": "dev-master",
         "friendsofcake/crud": "dev-master"
     },
     "license": "MIT",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/funayaki/core"
+        }
+    ],
     "authors": [
         {
             "name": "Croogo Development Team",
