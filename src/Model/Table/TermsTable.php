@@ -1,6 +1,6 @@
 <?php
 
-namespace Taxonomy\Model\Table;
+namespace Croogo\Taxonomy\Model\Table;
 
 use ArrayObject;
 use Cake\Event\Event;
@@ -237,7 +237,7 @@ class TermsTable extends CroogoTable
             $dataToPersist = (!is_null($taxonomyId)) ? $this->Taxonomies->get($taxonomyId) : $this->Taxonomies->newEntity();
 
             $dataToPersist = $this->Taxonomies->patchEntity($dataToPersist, [
-                'parent_id' => $entity->parent_id,
+                'parent_id' => isset($entity->taxonomies[0]) ? $entity->taxonomies[0]->parent_id : null,
                 'term_id' => $termId,
                 'vocabulary_id' => $vocabularyId,
             ]);

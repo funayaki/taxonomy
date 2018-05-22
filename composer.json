@@ -2,7 +2,8 @@
     "name": "funayaki/taxonomy",
     "description": "Croogo Taxonomy Plugin",
     "require": {
-        "croogo/core": "^3.0.1"
+        "croogo/core": "^3.0.1",
+        "friendsofcake/crud": "dev-master"
     },
     "license": "MIT",
     "authors": [
@@ -14,7 +15,7 @@
     "type": "cakephp-plugin",
     "autoload": {
         "psr-4": {
-            "Taxonomy\\": "src"
+            "Croogo\\Taxonomy\\": "src"
         }
     },
     "minimum-stability": "dev"

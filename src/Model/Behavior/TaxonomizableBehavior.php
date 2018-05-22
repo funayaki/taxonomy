@@ -1,6 +1,6 @@
 <?php
 
-namespace Taxonomy\Model\Behavior;
+namespace Croogo\Taxonomy\Model\Behavior;
 
 use Cake\Event\Event;
 use Cake\I18n\I18n;
@@ -205,7 +205,7 @@ class TaxonomizableBehavior extends Behavior
      */
     public function beforeSave(Event $event, Entity $entity)
     {
-        if (!$entity->has('taxonomies')) {
+        if (!$entity->has('taxonomy_data')) {
             return;
         }
 
@@ -231,7 +231,7 @@ class TaxonomizableBehavior extends Behavior
         $term = $options['term'];
 
         if (is_string($term)) {
-            $locale = I18n::locale();
+            $locale = I18n::getLocale();
             $cacheKeys = ['term', $locale, $term];
             $cacheKey = implode('_', $cacheKeys);
             $term = $this->_table->Taxonomies->Terms->find()

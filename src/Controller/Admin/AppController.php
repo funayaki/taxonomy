@@ -1,8 +1,8 @@
 <?php
 
-namespace Taxonomy\Controller\Admin;
+namespace Croogo\Taxonomy\Controller\Admin;
 
-use App\Controller\AppController as BaseController;
+use Croogo\Core\Controller\Admin\AppController as CroogoController;
 
 /**
  * Taxonomy Admin Controller
@@ -14,7 +14,7 @@ use App\Controller\AppController as BaseController;
  * @license  http://www.opensource.org/licenses/mit-license.php The MIT License
  * @link     http://www.croogo.org
  */
-class AppController extends BaseController
+class AppController extends CroogoController
 {
 
 }

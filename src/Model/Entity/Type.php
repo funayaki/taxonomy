@@ -1,6 +1,6 @@
 <?php
 
-namespace Taxonomy\Model\Entity;
+namespace Croogo\Taxonomy\Model\Entity;
 
 use Cake\ORM\Behavior\Translate\TranslateTrait;
 use Cake\ORM\Entity;

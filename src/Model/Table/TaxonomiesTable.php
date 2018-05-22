@@ -1,6 +1,6 @@
 <?php
 
-namespace Taxonomy\Model\Table;
+namespace Croogo\Taxonomy\Model\Table;
 
 use Croogo\Core\Model\Table\CroogoTable;
 

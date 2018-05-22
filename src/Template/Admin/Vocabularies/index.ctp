@@ -1,21 +1,12 @@
 <?php
-/**
- * @var \App\View\AppView $this
- * @var \Taxonomy\Model\Entity\Vocabulary[]|\Cake\Collection\CollectionInterface $vocabularies
- */
-$this->extend('Cirici/AdminLTE./Common/index');
 
-$this->assign('subtitle', __d('croogo', 'Index'));
+$this->extend('Croogo/Core./Common/admin_index');
 
-$this->start('breadcrumb');
-$this->Breadcrumbs
-    ->add(__d('croogo', 'Vocabularies'), ['action' => 'index'])
-    ->add(__d('croogo', 'Index'), null, ['class' => 'active']);
+$this->Breadcrumbs->add(__d('croogo', 'Content'),
+        ['plugin' => 'Croogo/Nodes', 'controller' => 'Nodes', 'action' => 'index'])
+    ->add(__d('croogo', 'Vocabularies'), $this->request->getRequestTarget());
 
-echo $this->Breadcrumbs->render();
-$this->end();
-
-$this->start('table-header');
+$this->start('table-heading');
 $tableHeaders = $this->Html->tableHeaders([
     $this->Paginator->sort('title', __d('croogo', 'Title')),
     $this->Paginator->sort('alias', __d('croogo', 'Alias')),
@@ -30,32 +21,24 @@ $this->append('table-body');
 $rows = [];
 foreach ($vocabularies as $vocabulary) :
     $actions = [];
-    $actions[] = $this->Html->link(__d('croogo', 'View terms'),
-        ['controller' => 'Terms', 'action' => 'index', '?' => ['vocabulary_id' => $vocabulary->id]],
-        ['class' => 'btn btn-default btn-xs']
-    );
-    $actions[] = $this->Html->link(__d('croogo', 'Move up'),
-        ['controller' => 'vocabularies', 'action' => 'moveUp', $vocabulary->id],
-        ['class' => 'btn btn-default btn-xs']
-    );
-    $actions[] = $this->Html->link(__d('croogo', 'Move down'),
-        ['controller' => 'vocabularies', 'action' => 'moveDown', $vocabulary->id],
-        ['class' => 'btn btn-default btn-xs']
-    );
-    $actions[] = $this->Html->link(__d('croogo', 'Edit this item'),
-        ['controller' => 'vocabularies', 'action' => 'edit', $vocabulary->id],
-        ['class' => 'btn btn-default btn-xs']
-    );
-    $actions[] = $this->Form->postLink(__d('croogo', 'Remove this item'),
-        ['controller' => 'vocabularies', 'action' => 'delete', $vocabulary->id],
-        ['confirm' => __d('croogo', 'Are you sure?'), 'class' => 'btn btn-danger btn-xs']
-    );
+    $actions[] = $this->Croogo->adminRowAction('', ['controller' => 'Terms', 'action' => 'index', '?' => ['vocabulary_id' => $vocabulary->id]],
+        ['icon' => $this->Theme->getIcon('view'), 'tooltip' => __d('croogo', 'View terms')]);
+    $actions[] = $this->Croogo->adminRowAction('', ['action' => 'moveUp', $vocabulary->id],
+        ['icon' => $this->Theme->getIcon('move-up'), 'tooltip' => __d('croogo', 'Move up'), 'method' => 'post']);
+    $actions[] = $this->Croogo->adminRowAction('', ['action' => 'moveDown', $vocabulary->id],
+        ['icon' => $this->Theme->getIcon('move-down'), 'tooltip' => __d('croogo', 'Move down'), 'method' => 'post']);
+    $actions[] = $this->Croogo->adminRowActions($vocabulary->id);
+    $actions[] = $this->Croogo->adminRowAction('', ['action' => 'edit', $vocabulary->id],
+        ['icon' => $this->Theme->getIcon('update'), 'tooltip' => __d('croogo', 'Edit this item')]);
+    $actions[] = $this->Croogo->adminRowAction('', ['action' => 'delete', $vocabulary->id],
+        ['icon' => $this->Theme->getIcon('delete'), 'tooltip' => __d('croogo', 'Remove this item')],
+        __d('croogo', 'Are you sure?'));
     $actions = $this->Html->div('item-actions', implode(' ', $actions));
     $rows[] = [
         $this->Html->link($vocabulary->title, ['controller' => 'Terms', 'action' => 'index', '?' => ['vocabulary_id' => $vocabulary->id]]),
         $vocabulary->alias,
         $vocabulary->plugin,
-        [$actions, ['class' => 'actions', 'style' => 'white-space:nowrap']],
+        $actions,
     ];
 endforeach;
 

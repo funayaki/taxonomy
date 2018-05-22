@@ -1,6 +1,6 @@
 <?php
 
-namespace Taxonomy\Model\Table;
+namespace Croogo\Taxonomy\Model\Table;
 
 use Cake\ORM\RulesChecker;
 use Cake\Validation\Validator;

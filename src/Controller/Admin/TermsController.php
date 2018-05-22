@@ -1,6 +1,6 @@
 <?php
 
-namespace Taxonomy\Controller\Admin;
+namespace Croogo\Taxonomy\Controller\Admin;
 
 use Cake\Datasource\Exception\RecordNotFoundException;
 use Cake\Event\Event;
@@ -51,12 +51,12 @@ class TermsController extends AppController
     {
         parent::initialize();
 
-//        $this->Crud->config('actions.add', [
-//            'className' => 'Croogo/Taxonomy.Admin/TermAdd',
-//        ]);
-//        $this->Crud->config('actions.edit', [
-//            'className' => 'Croogo/Taxonomy.Admin/TermEdit',
-//        ]);
+        $this->Crud->config('actions.add', [
+            'className' => 'Croogo/Taxonomy.Admin/TermAdd',
+        ]);
+        $this->Crud->config('actions.edit', [
+            'className' => 'Croogo/Taxonomy.Admin/TermEdit',
+        ]);
     }
 
     /**
@@ -78,11 +78,12 @@ class TermsController extends AppController
     /**
      * Admin index
      *
+     * @param int $vocabularyId
      * @access public
      */
-    public function index()
+    public function index($vocabularyId = null)
     {
-        $vocabularyId = $this->request->getQuery('vocabulary_id');
+        $vocabularyId = $this->request->query('vocabulary_id');
         $response = $this->_ensureVocabularyIdExists($vocabularyId);
         if ($response instanceof Response) {
             return $response;

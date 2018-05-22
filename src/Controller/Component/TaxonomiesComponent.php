@@ -1,6 +1,6 @@
 <?php
 
-namespace Taxonomy\Controller\Component;
+namespace Croogo\Taxonomy\Controller\Component;
 
 use Cake\Controller\Component;
 use Cake\Core\Configure;
