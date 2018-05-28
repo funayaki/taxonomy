@@ -1,20 +1,22 @@
 <?php
 
-namespace Croogo\Taxonomy\Model\Table;
+namespace Taxonomy\Model\Table;
 
 use Cake\Database\Schema\TableSchema;
 use Cake\ORM\RulesChecker;
+use Cake\ORM\Table;
+use Cake\Utility\Hash;
+use Cake\Utility\Inflector;
 use Cake\Validation\Validator;
-use Croogo\Core\Model\Table\CroogoTable;
 
-class TypesTable extends CroogoTable
+class TypesTable extends Table
 {
 
-/**
- * Display fields for this model
- *
- * @var array
- */
+    /**
+     * Display fields for this model
+     *
+     * @var array
+     */
     protected $_displayFields = [
         'title' => [
             'url' => [
@@ -56,7 +58,7 @@ class TypesTable extends CroogoTable
             'groups' => ['nodes', 'taxonomy']
         ]);
         $this->addBehavior('Croogo/Core.Trackable');
-        $this->belongsToMany('Croogo/Taxonomy.Vocabularies', [
+        $this->belongsToMany('Taxonomy.Vocabularies', [
             'joinTable' => 'types_vocabularies',
         ]);
     }
@@ -107,4 +109,39 @@ class TypesTable extends CroogoTable
         return parent::_initializeSchema($table);
     }
 
+    /**
+     * https://github.com/croogo/core/blob/a4c39287b001f4847e73edde75a15439b4bb0ec9/src/Model/Table/CroogoTable.php#L127-L159
+     *
+     * Return formatted display fields
+     *
+     * @param array $displayFields
+     * @return array
+     */
+    public function displayFields($displayFields = null)
+    {
+        if (isset($displayFields)) {
+            $this->_displayFields = $displayFields;
+        }
+        $out = [];
+        $defaults = ['sort' => true, 'type' => 'text', 'url' => [], 'options' => []];
+        foreach ($this->_displayFields as $field => $label) {
+            if (is_int($field)) {
+                $field = $label;
+                list(, $label) = pluginSplit($label);
+                $out[$field] = Hash::merge($defaults, [
+                    'label' => Inflector::humanize($label),
+                ]);
+            } elseif (is_array($label)) {
+                $out[$field] = Hash::merge($defaults, $label);
+                if (!isset($out[$field]['label'])) {
+                    $out[$field]['label'] = Inflector::humanize($field);
+                }
+            } else {
+                $out[$field] = Hash::merge($defaults, [
+                    'label' => $label,
+                ]);
+            }
+        }
+        return $out;
+    }
 }

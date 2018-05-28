@@ -1,16 +1,16 @@
 <?php
 
-namespace Croogo\Taxonomy\Model\Table;
+namespace Taxonomy\Model\Table;
 
-use Croogo\Core\Model\Table\CroogoTable;
+use Cake\ORM\Table;
 
-class TaxonomiesTable extends CroogoTable
+class TaxonomiesTable extends Table
 {
 
     public function initialize(array $config)
     {
-        $this->belongsTo('Croogo/Taxonomy.Terms');
-        $this->belongsTo('Croogo/Taxonomy.Vocabularies');
+        $this->belongsTo('Taxonomy.Terms');
+        $this->belongsTo('Taxonomy.Vocabularies');
         $this->addBehavior('Tree');
         $this->addBehavior('Timestamp', [
             'events' => [
@@ -20,19 +20,19 @@ class TaxonomiesTable extends CroogoTable
                 ]
             ]
         ]);
-		$this->addBehavior('Croogo/Core.Cached', [
-			'groups' => [
-				'nodes',
-				'taxonomy',
-			],
-		]);
+        $this->addBehavior('Croogo/Core.Cached', [
+            'groups' => [
+                'nodes',
+                'taxonomy',
+            ],
+        ]);
     }
 
     /**
      * Generates a tree of terms for a vocabulary
      *
-     * @param  string $alias   Vocabulary alias (e.g., categories)
-     * @param  array  $options
+     * @param  string $alias Vocabulary alias (e.g., categories)
+     * @param  array $options
      * @return array
      */
     public function getTree($alias, $options = [])
@@ -45,22 +45,23 @@ class TaxonomiesTable extends CroogoTable
         ];
         $options = array_merge($_options, $options);
 
+        // TODO
         // Check if cached
-        if ($this->useCache && isset($options['cache']['config'])) {
-            if (isset($options['cache']['prefix'])) {
-                $cacheName = $options['cache']['prefix'] . '_' . md5($alias . serialize($options));
-            } elseif (isset($options['cache']['name'])) {
-                $cacheName = $options['cache']['name'];
-            }
-
-            if (isset($cacheName)) {
-                $cacheName .= '_' . Configure::read('Config.language');
-                $cachedResult = Cache::read($cacheName, $options['cache']['config']);
-                if ($cachedResult) {
-                    return $cachedResult;
-                }
-            }
-        }
+//        if ($this->useCache && isset($options['cache']['config'])) {
+//            if (isset($options['cache']['prefix'])) {
+//                $cacheName = $options['cache']['prefix'] . '_' . md5($alias . serialize($options));
+//            } elseif (isset($options['cache']['name'])) {
+//                $cacheName = $options['cache']['name'];
+//            }
+//
+//            if (isset($cacheName)) {
+//                $cacheName .= '_' . Configure::read('Config.language');
+//                $cachedResult = Cache::read($cacheName, $options['cache']['config']);
+//                if ($cachedResult) {
+//                    return $cachedResult;
+//                }
+//            }
+//        }
 
         $vocabulary = $this->Vocabularies->findByAlias($alias)->first();
         if (!isset($vocabulary->id)) {
@@ -88,7 +89,7 @@ class TaxonomiesTable extends CroogoTable
             'valueField' => $options['value'],
             'groupField' => 'id',
         ])->where([
-            $this->Terms->aliasField('id') .' IN' => $termsIds,
+            $this->Terms->aliasField('id') . ' IN' => $termsIds,
         ])->toArray();
 
         $termsTree = [];
@@ -120,16 +121,16 @@ class TaxonomiesTable extends CroogoTable
         return $termsTree;
     }
 
-/**
- * Check if Term HABTM Vocabulary.
- *
- * If yes, return Taxonomy ID
- * otherwise, return false
- *
- * @param int $termId
- * @param int $vocabularyId
- * @return boolean
- */
+    /**
+     * Check if Term HABTM Vocabulary.
+     *
+     * If yes, return Taxonomy ID
+     * otherwise, return false
+     *
+     * @param int $termId
+     * @param int $vocabularyId
+     * @return boolean
+     */
     public function termInVocabulary($termId, $vocabularyId)
     {
         $taxonomy = $this->find()->where([

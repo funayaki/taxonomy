@@ -1,6 +1,6 @@
 <?php
 
-namespace Croogo\Taxonomy\View\Helper;
+namespace Taxonomy\View\Helper;
 
 use Cake\Event\Event;
 use Cake\Utility\Inflector;
@@ -100,8 +100,8 @@ class TaxonomiesHelper extends Helper
             'tagAttributes' => [],
             'type' => null,
             'link' => true,
-            'plugin' => 'Croogo/Nodes',
-            'controller' => 'Nodes',
+//            'plugin' => 'Croogo/Nodes',
+//            'controller' => 'Nodes',
             'action' => 'term',
             'element' => 'Croogo/Taxonomy.vocabulary',
         ];
@@ -189,8 +189,8 @@ class TaxonomiesHelper extends Helper
                 $type->title,
                 [
                     'prefix' => false,
-                    'plugin' => 'Croogo/Nodes',
-                    'controller' => 'Nodes',
+//                    'plugin' => 'Croogo/Nodes',
+//                    'controller' => 'Nodes',
                     'action' => 'term',
                     'type' => $type->alias,
                     'slug' => $termData['Term']['slug'],

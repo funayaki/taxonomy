@@ -1,10 +1,11 @@
 <?php
-namespace Croogo\Taxonomy\Test\TestCase\Model;
+namespace Taxonomy\Test\TestCase\Model\Table;
 
-use Croogo\TestSuite\CroogoTestCase;
+use Cake\ORM\TableRegistry;
+use Cake\TestSuite\TestCase;
 use Taxonomy\Model\Taxonomy;
 
-class TaxonomyTest extends CroogoTestCase
+class TaxonomyTest extends TestCase
 {
 
     public $fixtures = [
@@ -36,7 +37,7 @@ class TaxonomyTest extends CroogoTestCase
     public function setUp()
     {
         parent::setUp();
-        $this->Taxonomy = ClassRegistry::init('Taxonomy.Taxonomy');
+        $this->Taxonomy = TableRegistry::init('Taxonomy.Taxonomy');
     }
 
     public function tearDown()

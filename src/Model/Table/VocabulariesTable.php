@@ -1,15 +1,15 @@
 <?php
 
-namespace Croogo\Taxonomy\Model\Table;
+namespace Taxonomy\Model\Table;
 
 use Cake\ORM\RulesChecker;
+use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Croogo\Core\Model\Table\CroogoTable;
 
 /**
  * @property TaxonomiesTable Taxonomies
  */
-class VocabulariesTable extends CroogoTable
+class VocabulariesTable extends Table
 {
 
     public function initialize(array $config)
@@ -31,10 +31,10 @@ class VocabulariesTable extends CroogoTable
         $this->addBehavior('Croogo/Core.Cached', [
             'groups' => ['taxonomy']
         ]);
-        $this->belongsToMany('Croogo/Taxonomy.Types', [
+        $this->belongsToMany('Taxonomy.Types', [
             'joinTable' => 'types_vocabularies',
         ]);
-        $this->hasMany('Croogo/Taxonomy.Taxonomies', [
+        $this->hasMany('Taxonomy.Taxonomies', [
             'dependent' => true,
         ]);
     }

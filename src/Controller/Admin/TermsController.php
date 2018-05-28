@@ -1,11 +1,11 @@
 <?php
 
-namespace Croogo\Taxonomy\Controller\Admin;
+namespace Taxonomy\Controller\Admin;
 
 use Cake\Datasource\Exception\RecordNotFoundException;
 use Cake\Event\Event;
 use Cake\Network\Response;
-use Croogo\Taxonomy\Model\Table\TermsTable;
+use Taxonomy\Model\Table\TermsTable;
 
 /**
  * Terms Controller
@@ -31,7 +31,7 @@ class TermsController extends AppController
 
     protected $_redirectUrl = [
         'prefix' => 'admin',
-        'plugin' => 'Croogo/Taxonomy',
+        'plugin' => 'Taxonomy',
         'controller' => 'Vocabularies',
         'action' => 'index',
     ];
@@ -51,11 +51,11 @@ class TermsController extends AppController
     {
         parent::initialize();
 
-        $this->Crud->config('actions.add', [
-            'className' => 'Croogo/Taxonomy.Admin/TermAdd',
+        $this->Crud->setConfig('actions.add', [
+            'className' => 'Taxonomy.Admin/TermAdd',
         ]);
-        $this->Crud->config('actions.edit', [
-            'className' => 'Croogo/Taxonomy.Admin/TermEdit',
+        $this->Crud->setConfig('actions.edit', [
+            'className' => 'Taxonomy.Admin/TermEdit',
         ]);
     }
 
@@ -79,6 +79,7 @@ class TermsController extends AppController
      * Admin index
      *
      * @param int $vocabularyId
+     * @return bool
      * @access public
      */
     public function index($vocabularyId = null)
@@ -97,7 +98,7 @@ class TermsController extends AppController
         $defaultType = $this->__getDefaultType($vocabulary);
 
         $terms = $this->Terms->find()
-            ->innerJoinWith('Taxonomies', function($q) use ($vocabularyId) {
+            ->innerJoinWith('Taxonomies', function ($q) use ($vocabularyId) {
                 return $q->where([
                     'vocabulary_id' => $vocabularyId,
                 ]);
@@ -115,7 +116,7 @@ class TermsController extends AppController
      *
      * @param int $id
      * @param int $vocabularyId
-     * @return void
+     * @return \Cake\Http\Response|null
      * @access public
      */
     public function delete($id = null, $vocabularyId = null)
@@ -230,7 +231,7 @@ class TermsController extends AppController
     /**
      * Check that Term exists or flash and redirect to $url when it is not found
      *
-     * @param int $idTerm Id
+     * @param int $id Term Id
      * @param string $url Redirect Url
      * @return bool True if Term exists
      */
@@ -249,8 +250,8 @@ class TermsController extends AppController
     /**
      * Checks that Taxonomy exists or flash redirect to $url when it is not found
      *
-     * @param int $idTerm Id
-     * @param int $vocabularyIdVocabulary Id
+     * @param int $id Term Id
+     * @param int $vocabularyId Vocabulary Id
      * @param string $url Redirect Url
      * @return bool True if Term exists
      */
@@ -270,7 +271,7 @@ class TermsController extends AppController
     /**
      * Checks that Vocabulary exists or flash redirect to $url when it is not found
      *
-     * @param int $vocabularyIdVocabulary Id
+     * @param int $vocabularyId Vocabulary Id
      * @param string $url Redirect Url
      * @return bool True if Term exists
      */

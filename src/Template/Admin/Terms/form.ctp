@@ -1,10 +1,17 @@
 <?php
-$this->extend('Croogo/Core./Common/admin_edit');
+/**
+ * @var \App\View\AppView $this
+ * @var \Taxonomy\Model\Entity\Term $term
+ * @var \Taxonomy\Model\Entity\Vocabulary $vocabulary
+ */
 
-$this->Croogo->adminScript('Croogo/Taxonomy.terms');
+//$this->Croogo->adminScript('Croogo/Taxonomy.terms');
 
-$this->Breadcrumbs->add(__d('croogo', 'Content'),
-    ['plugin' => 'Croogo/Nodes', 'controller' => 'Nodes', 'action' => 'index']);
+$this->extend('Cirici/AdminLTE./Common/form');
+
+// TODO
+//$this->Breadcrumbs->add(__d('croogo', 'Content'),
+//    ['plugin' => 'Croogo/Nodes', 'controller' => 'Nodes', 'action' => 'index']);
 
 if ($this->request->param('action') === 'edit'):
     $this->Breadcrumbs->add(__d('croogo', 'Vocabularies'), ['controller' => 'Vocabularies', 'action' => 'index'])
@@ -13,7 +20,7 @@ if ($this->request->param('action') === 'edit'):
 endif;
 
 if ($this->request->param('action') === 'add'):
-    $this->assign('title', __d('croogo', '%s: Add Term', $vocabulary->title));
+    $this->assign('title', __d('croogo', '{0}: Add Term', $vocabulary->title));
 
     $this->Breadcrumbs->add(__d('croogo', 'Vocabularies'),
         ['controller' => 'Vocabularies', 'action' => 'index', $vocabulary->id])
@@ -31,42 +38,47 @@ $formUrl = [
 
 $this->assign('form-start', $this->Form->create($term, [
     'url' => $formUrl,
+    'novalidate' => true,
 ]));
 
-$this->append('tab-heading');
-    echo $this->Croogo->adminTab(__d('croogo', 'Term'), '#term-basic');
+//$this->append('tab-heading');
+//echo $this->Croogo->adminTab(__d('croogo', 'Term'), '#term-basic');
+//$this->end();
+
+$this->append('form-content');
+//echo $this->Html->tabStart('term-basic');
+echo $this->Form->control('title', [
+    'label' => __d('croogo', 'Title'),
+    'data-slug' => '#slug',
+]);
+
+echo $this->Form->control('slug', [
+    'label' => __d('croogo', 'Slug'),
+]);
+
+echo $this->Form->control('taxonomies.0.parent_id', [
+    'options' => $parentTree,
+    'empty' => '(no parent)',
+    'label' => __d('croogo', 'Parent'),
+    'class' => 'c-select',
+]);
+echo $this->Form->control('taxonomies.0.id');
+echo $this->Form->hidden('taxonomies.0.vocabulary_id', [
+    'value' => $vocabulary->id,
+]);
+echo $this->Form->control('description', [
+    'label' => __d('croogo', 'Description'),
+]);
+
+//echo $this->Html->tabEnd();
 $this->end();
 
-$this->append('tab-content');
-    echo $this->Html->tabStart('term-basic');
-        echo $this->Form->input('title', [
-            'label' => __d('croogo', 'Title'),
-            'data-slug' => '#slug',
-        ]);
+//$this->start('buttons');
+//echo $this->Html->beginBox(__d('croogo', 'Publishing'));
+//echo $this->element('Croogo/Core.admin/buttons', ['type' => 'Terms']);
+//echo $this->Html->endBox();
+//$this->end();
 
-        echo $this->Form->input('slug', [
-            'label' => __d('croogo', 'Slug'),
-        ]);
+$this->assign('form-button', $this->Form->button(__d('croogo', 'Submit')));
 
-        echo $this->Form->input('taxonomies.0.parent_id', [
-            'options' => $parentTree,
-            'empty' => '(no parent)',
-            'label' => __d('croogo', 'Parent'),
-            'class' => 'c-select',
-        ]);
-        echo $this->Form->input('taxonomies.0.id');
-        echo $this->Form->hidden('taxonomies.0.vocabulary_id', [
-            'value' => $vocabulary->id,
-        ]);
-        echo $this->Form->input('description', [
-            'label' => __d('croogo', 'Description'),
-        ]);
-
-    echo $this->Html->tabEnd();
-$this->end();
-
-$this->start('buttons');
-    echo $this->Html->beginBox(__d('croogo', 'Publishing'));
-    echo $this->element('Croogo/Core.admin/buttons', ['type' => 'Terms']);
-    echo $this->Html->endBox();
-$this->end();
+$this->assign('form-end', $this->Form->end());

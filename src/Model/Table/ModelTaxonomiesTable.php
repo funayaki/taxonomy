@@ -1,8 +1,7 @@
 <?php
 
-namespace Croogo\Taxonomy\Model\Table;
-
-use Croogo\Core\Model\Table\CroogoTable;
+namespace Taxonomy\Model\Table;
+use Cake\ORM\Table;
 
 /**
  * ModelTaxonomies
@@ -12,7 +11,7 @@ use Croogo\Core\Model\Table\CroogoTable;
  * @license  http://www.opensource.org/licenses/mit-license.php The MIT License
  * @link     http://www.croogo.org
  */
-class ModelTaxonomiesTable extends CroogoTable
+class ModelTaxonomiesTable extends Table
 {
 
     public function initialize(array $config)

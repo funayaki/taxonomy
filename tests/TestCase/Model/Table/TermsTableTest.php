@@ -1,11 +1,12 @@
 <?php
 
-namespace Croogo\Taxonomy\Test\TestCase\Model;
+namespace Taxonomy\Test\TestCase\Model\Table;
 
-use Croogo\TestSuite\CroogoTestCase;
+use Cake\ORM\TableRegistry;
+use Cake\TestSuite\TestCase;
 use Taxonomy\Model\Term;
 
-class TermTest extends CroogoTestCase
+class TermTest extends TestCase
 {
 
     public $fixtures = [
@@ -37,7 +38,7 @@ class TermTest extends CroogoTestCase
     public function setUp()
     {
         parent::setUp();
-        $this->Term = ClassRegistry::init('Taxonomy.Term');
+        $this->Term = TableRegistry::init('Taxonomy.Term');
     }
 
     public function tearDown()
@@ -93,9 +94,9 @@ class TermTest extends CroogoTestCase
     public function testSaveAndGetIdShouldShouldUpdateTermsDataWhenSlugExists()
     {
         $existingUpdatedTermData = [
-                'title' => 'Uncategorized update',
-                'slug' => 'uncategorized',
-                'description' => 'A new description'
+            'title' => 'Uncategorized update',
+            'slug' => 'uncategorized',
+            'description' => 'A new description'
         ];
 
         $this->Term->saveAndGetId($existingUpdatedTermData);

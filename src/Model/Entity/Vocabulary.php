@@ -1,6 +1,6 @@
 <?php
 
-namespace Croogo\Taxonomy\Model\Entity;
+namespace Taxonomy\Model\Entity;
 
 use Cake\ORM\Entity;
 

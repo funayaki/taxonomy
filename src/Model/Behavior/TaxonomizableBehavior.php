@@ -1,6 +1,6 @@
 <?php
 
-namespace Croogo\Taxonomy\Model\Behavior;
+namespace Taxonomy\Model\Behavior;
 
 use Cake\Event\Event;
 use Cake\I18n\I18n;
@@ -248,10 +248,10 @@ class TaxonomizableBehavior extends Behavior
 
         $query
             ->matching('Taxonomies', function (Query $q) use ($term) {
-               return $q
-                   ->where([
-                       'term_id' => $term->id
-                   ]);
+                return $q
+                    ->where([
+                        'term_id' => $term->id
+                    ]);
             });
 
         return $query;

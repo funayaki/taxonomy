@@ -1,8 +1,11 @@
 <?php
 
-namespace Croogo\Taxonomy\Test\TestCase\View\Helper;
+namespace Taxonomy\Test\TestCase\View\Helper;
 
+use Cake\Controller\ComponentRegistry;
 use Cake\Controller\Controller;
+use Cake\TestSuite\TestCase;
+use Cake\View\View;
 use Croogo\TestSuite\CroogoTestCase;
 use Taxonomy\View\Helper\TaxonomiesHelper;
 
@@ -12,12 +15,12 @@ class TheTaxonomyTestController extends Controller
     public $uses = null;
 }
 
-class TaxonomiesHelperTest extends CroogoTestCase
+class TaxonomiesHelperTest extends TestCase
 {
 
-/**
- * setUp
- */
+    /**
+     * setUp
+     */
     public function setUp()
     {
         parent::setUp();
@@ -29,18 +32,18 @@ class TaxonomiesHelperTest extends CroogoTestCase
         $this->Taxonomies = new TaxonomiesHelper($this->View);
     }
 
-/**
- * tearDown
- */
+    /**
+     * tearDown
+     */
     public function tearDown()
     {
         unset($this->View);
         unset($this->Taxonomies);
     }
 
-/**
- * Test [vocabulary] shortcode
- */
+    /**
+     * Test [vocabulary] shortcode
+     */
     public function testVocabularyShortcode()
     {
         $content = '[vocabulary:categories type="blog"]';

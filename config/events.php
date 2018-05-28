@@ -1,6 +1,6 @@
 <?php
 
-namespace Croogo\Taxonomy\Config;
+namespace Taxonomy\Config;
 
 return [
     'EventHandlers' => [

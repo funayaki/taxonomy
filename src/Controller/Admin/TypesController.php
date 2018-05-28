@@ -1,6 +1,6 @@
 <?php
 
-namespace Croogo\Taxonomy\Controller\Admin;
+namespace Taxonomy\Controller\Admin;
 
 use Cake\Event\Event;
 
@@ -14,17 +14,17 @@ use Cake\Event\Event;
  * @license  http://www.opensource.org/licenses/mit-license.php The MIT License
  * @link     http://www.croogo.org
  *
- * @property \Croogo\Taxonomy\Model\Table\TypesTable Types
+ * @property \Taxonomy\Model\Table\TypesTable Types
  */
 class TypesController extends AppController
 {
-    public $modelClass = 'Croogo/Taxonomy.Types';
+    public $modelClass = 'Taxonomy.Types';
 
     public function initialize()
     {
         parent::initialize();
 
-        $this->Crud->config('actions.index', [
+        $this->Crud->setConfig('actions.index', [
             'displayFields' => $this->Types->displayFields(),
         ]);
     }

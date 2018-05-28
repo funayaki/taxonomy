@@ -1,7 +1,8 @@
 <?php
 
-namespace Croogo\Taxonomy\Action\Admin;
+namespace Taxonomy\Action\Admin;
 
+use Cake\Http\Response;
 use Crud\Action\BaseAction;
 
 class TermAddAction extends BaseAction
@@ -13,7 +14,7 @@ class TermAddAction extends BaseAction
     /**
      * Implements Term add
      *
-     * @param int $vocabularyId
+     * @return \Cake\Http\Response|null
      * @access public
      */
     protected function _handle()
