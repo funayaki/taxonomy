@@ -128,6 +128,7 @@ class TaxonomiesHelper extends Helper
      * @param array $terms
      * @param array $options
      * @param int $depth
+     * @return string
      */
     public function nestedTerms($terms, $options, $depth = 1)
     {
