@@ -198,10 +198,10 @@ class TermsController extends AppController
 
         $taxonomy = $this->Terms->Taxonomies->get($taxonomyId);
         if ($this->Terms->Taxonomies->{'move' . ucfirst($direction)}($taxonomy, $step)) {
-            $messageFlash = __d('croogo', 'Moved %s successfully', $direction);
+            $messageFlash = __d('croogo', 'Moved {0} successfully', $direction);
             $cssClass = ['class' => 'success'];
         } else {
-            $messageFlash = __d('croogo', 'Could not move %s', $direction);
+            $messageFlash = __d('croogo', 'Could not move {0}', $direction);
             $cssClass = ['class' => 'error'];
         }
         $this->Flash->{$cssClass['class']}($messageFlash);
