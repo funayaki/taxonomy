@@ -11,7 +11,6 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\ORM\TableRegistry;
 use Cake\Validation\Validator;
-use Croogo\Core\Model\Table\CroogoTable;
 
 /**
  * Term
@@ -43,7 +42,7 @@ class TermsTable extends Table
         $this->addBehavior('Croogo/Core.Trackable');
 
         $this->belongsToMany('Taxonomy.Vocabularies', [
-            'through' => 'Croogo/Taxonomy.Taxonomies',
+            'through' => 'Taxonomy.Taxonomies',
             'foreignKey' => 'term_id',
             'targetForeignKey' => 'vocabulary_id',
         ]);
@@ -112,7 +111,7 @@ class TermsTable extends Table
      */
     public function beforeDelete(Event $event, EntityInterface $entity, ArrayObject $options)
     {
-        $Taxonomies = TableRegistry::get('Croogo/Taxonomy.Taxonomies');
+        $Taxonomies = TableRegistry::get('Taxonomy.Taxonomies');
         $count = $Taxonomies->find()
             ->where([
                 $Taxonomies->aliasField('term_id') => $entity->id,
