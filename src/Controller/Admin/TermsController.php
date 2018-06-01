@@ -175,6 +175,7 @@ class TermsController extends AppController
      * @param int $id
      * @param int $vocabularyId
      * @param int $step
+     * @return bool|\Cake\Http\Response|null
      * @access private
      */
     private function __move($direction, $id, $vocabularyId, $step)
