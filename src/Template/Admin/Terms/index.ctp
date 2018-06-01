@@ -16,6 +16,10 @@ $this->extend('Cirici/AdminLTE./Common/index');
 //        ['plugin' => 'Croogo/Taxonomy', 'controller' => 'Vocabularies', 'action' => 'index'])
 //    ->add($vocabulary->title, $this->request->getRequestTarget());
 
+$this->Breadcrumbs
+    ->add(__d('croogo', 'Vocabularies'), ['plugin' => 'Taxonomy', 'controller' => 'Vocabularies', 'action' => 'index'])
+    ->add($vocabulary->title, $this->request->getRequestTarget());
+
 //$this->append('action-buttons');
 //echo $this->Croogo->adminAction(__d('croogo', 'Create term'), [
 //    'action' => 'add',
@@ -91,4 +95,11 @@ foreach ($terms as $term):
     ];
 endforeach;
 echo $this->Html->tableCells($rows);
+$this->end();
+
+$this->append('header-actions');
+echo $this->Html->link(__d('croogo', 'New Term'),
+    ['action' => 'add', 'vocabulary_id' => $vocabulary->id],
+    ['class' => 'btn btn-default pull-right']
+);
 $this->end();

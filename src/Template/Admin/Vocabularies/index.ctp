@@ -11,6 +11,9 @@ $this->extend('Cirici/AdminLTE./Common/index');
 //    ['plugin' => 'Html/Nodes', 'controller' => 'Nodes', 'action' => 'index'])
 //    ->add(__d('croogo', 'Vocabularies'), $this->request->getRequestTarget());
 
+$this->Breadcrumbs
+    ->add(__d('croogo', 'Vocabularies'), $this->request->getRequestTarget());
+
 $this->start('table-header');
 $tableHeaders = $this->Html->tableHeaders([
     $this->Paginator->sort('title', __d('croogo', 'Title')),
@@ -57,4 +60,11 @@ endforeach;
 
 echo $this->Html->tableCells($rows);
 
+$this->end();
+
+$this->append('header-actions');
+echo $this->Html->link(__d('croogo', 'New Vocabulary'),
+    ['action' => 'add'],
+    ['class' => 'btn btn-default pull-right']
+);
 $this->end();
