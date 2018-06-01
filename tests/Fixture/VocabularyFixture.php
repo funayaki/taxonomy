@@ -1,10 +1,10 @@
 <?php
 
-namespace Croogo\Taxonomy\Test\Fixture;
+namespace Taxonomy\Test\Fixture;
 
-use Croogo\Core\TestSuite\CroogoTestFixture;
+use Cake\TestSuite\Fixture\TestFixture;
 
-class VocabularyFixture extends CroogoTestFixture
+class VocabularyFixture extends TestFixture
 {
 
     public $name = 'Vocabulary';
